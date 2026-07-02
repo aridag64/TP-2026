@@ -64,7 +64,7 @@ def cargar_usuarios():
 
         for linea in archivo:
 
-            linea = linea.strip()
+            linea = linea.strip()      
             datos = linea.split(";")
             usuario = datos[0]
             contraseña = datos[1]

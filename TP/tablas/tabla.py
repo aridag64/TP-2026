@@ -91,8 +91,6 @@ def mostrar_tabla(matriz):
         no retorna nada
     """
 
-
-
     if len(matriz) == 0:
         print("la tabla esta vacia")
         return
@@ -112,7 +110,9 @@ def mostrar_tabla(matriz):
                     print(matriz[i][j], end="\t")
             print("")
     elif visualizar_columnas == "no":
+
         print("Seleccione las columnas que quiere ver:")
+
         for j in range(cantidad_columnas):
                 respuesta = input(f"¿Mostrar columna '{matriz[0][j]}'? si/no: ")
                 if respuesta == "si":
@@ -121,7 +121,7 @@ def mostrar_tabla(matriz):
         for i in range(cantidad_filas):
             for j in range(cantidad_columnas):
                 if columnas_activas[j]:
-                    print(f"{matriz[i][j]:<30}", end="")
+                    print(f"{matriz[i][j]:<10}", end="")
             print()
     else:
         print("ingrese una respuesta valida")
@@ -147,9 +147,6 @@ def guardar_tabla(nombre_proyecto:str, nombre_tabla:str, matriz:list):
         se crea un csv con el nombre del proyecto y el nombre de la tabla
         se abre el csv y se guarda los datos dados por la matriz
     """
-
-
-
 
     nombre_archivo = f"datos/{nombre_proyecto}-{nombre_tabla}.csv"
 

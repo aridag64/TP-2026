@@ -125,16 +125,16 @@ def ordenar_burbujeo(matriz):
     return lista
 
 
-def dar_mediana(matriz):
+#def dar_mediana(datos):
 
-    datos = ordenar_burbujeo(matriz)
+#    datos = ordenar_burbujeo(datos)
 
-    n = len(datos)
+#    n = len(datos)
 
-    if n % 2 == 0:
-        return (datos[n//2+1] + datos[n//2]) / 2
-    else:
-        return [datos(n+1)//2]
+#    if n % 2 == 0:
+#        return (datos[n//2+1] + datos[n//2]) / 2
+#    else:
+#        return [datos(n+1)//2]
 
 
 def dar_posicion(matriz, divisiones, k):

@@ -108,7 +108,7 @@ while entro == True:
                         varianza = dar_varianza(proyectos[proyecto_actual][tabla])
                         coeficiente = dar_coeficiente_variacion(proyectos[proyecto_actual][tabla])
                         desvio = dar_desvio_estandar(proyectos[proyecto_actual][tabla])
-                        mediana = dar_mediana(proyectos[proyecto_actual][tabla])
+                        #mediana = dar_mediana(proyectos[proyecto_actual][tabla])
                         corte_c = int(input("Ingrese el cuartil (1 al 3): "))
                         cuartil = dar_posicion(proyectos[proyecto_actual][tabla],4,corte_c)
                         corte_d  = int(input("Ingrese el decil (1 al 9): "))
@@ -118,7 +118,7 @@ while entro == True:
                         print(f"Varianza:{varianza}")
                         print(f"Coeficiente:{coeficiente}")
                         print(f"Desvio estandar:{desvio}")
-                        print(f"Mediana:{mediana}")
+                        #print(f"Mediana:{mediana}")
                         print(f"Cuartil:{cuartil}")
                         print(f"Decil:{decil}") 
             case "f":
