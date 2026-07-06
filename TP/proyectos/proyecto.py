@@ -48,7 +48,7 @@ def guardar_proyectos(proyectos:dict) -> None:
         no retorna nada
     """
 
-    with open("datos/proyectos.csv","w") as archivo:
+    with open("TP/datos/proyectos.csv","w") as archivo:
 
         for proyecto in proyectos:
             if len(proyectos[proyecto]) == 0:
@@ -71,7 +71,7 @@ def cargar_proyectos() -> dict:
 
     proyectos = {}
 
-    with open("datos/proyectos.csv","r") as archivo:
+    with open("TP/datos/proyectos.csv","r") as archivo:
 
         for linea in archivo:
 

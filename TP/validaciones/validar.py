@@ -119,7 +119,7 @@ def cargar_usuarios():
 
     usuarios = {}
 
-    with open("Usuarios/usuarios.txt","r") as archivo:
+    with open("TP/Usuarios/usuarios.txt","r") as archivo:
 
         for linea in archivo:
 
@@ -142,7 +142,7 @@ def registrar_usuario(usuarios:dict) -> None:
         nueva_contraseña = input("Ingrese una contraseña: ")
         usuarios[nuevo_usuario] = nueva_contraseña
 
-        with open("Usuarios/usuarios.txt","a") as archivo:
+        with open("TP/Usuarios/usuarios.txt","a") as archivo:
             archivo.write(f"{nuevo_usuario};{nueva_contraseña}\n")
 
         print("Usuario registrado correctamente.")
