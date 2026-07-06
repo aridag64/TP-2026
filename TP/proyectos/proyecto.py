@@ -1,41 +1,52 @@
 from tablas.tabla import cargar_tabla
+from validaciones.validar import *
 
-def crear_proyecto(proyectos:dict):
+def crear_proyecto(nombre:str,proyectos:dict) -> None:
 
-    nombre = input("Ingrese el nombre del proyecto: ")
+    """
+        ingresamos por parametro un diccionario proyectos
+        guardamos el diccionario proyectos con el nombre pasado por parametro en un csv
+        no retorna nada
+    """ 
+    proyectos[nombre] = {}
+    guardar_proyectos(proyectos)
+    print("Proyecto creado correctamente")
+
+def mostrar_proyectos(proyectos:dict) -> None:
+
+    """
+        ingresamos por parametro un diccionario proyectos
+        muestra por pantalla los proyectos disponibles
+        no retorna nada
+    """
+
+    if existe_proyecto(proyectos):
+        print("---PROYECTOS---")
+        for proyecto in proyectos:
+            print("->", proyecto)
+
+def seleccionar_proyecto(nombre:str,proyectos:dict) -> str:
+    """
+        ingresamos por parametro un diccionario proyectos
+        pedimos ingreso de nombre del proyecto
+    Returns:
+        retorna nombre del proyecto
+    """
 
     if nombre in proyectos:
-        print("Ese proyecto ya existe.")
-
+        return nombre 
     else:
-        proyectos[nombre] = {}
-        guardar_proyectos(proyectos)
-        print("Proyecto creado correctamente.")
-
-def mostrar_proyectos(proyectos:dict):
-
-    if len(proyectos) == 0:
-        print("No existen proyectos.")
-        return
-
-    print("---PROYECTOS---")
-
-    for proyecto in proyectos:
-        print("-", proyecto)
-
-def seleccionar_proyecto(proyectos:dict):
-
-    mostrar_proyectos(proyectos)
-
-    nombre = input("Proyecto: ")
-
-    if nombre in proyectos:
-        return nombre
-
-    print("No existe.")
+        print("No existe")
 
 
-def guardar_proyectos(proyectos):
+def guardar_proyectos(proyectos:dict) -> None:
+    """
+        ingresamos por parametro un diccionario proyectos
+        abrimos el archivo proyectos.csv como archivo
+        recorremos el archivo
+        guardamos los datos en el archivo
+        no retorna nada
+    """
 
     with open("datos/proyectos.csv","w") as archivo:
 
@@ -44,11 +55,19 @@ def guardar_proyectos(proyectos):
                 archivo.write(proyecto + ";\n")
             else:
                 for tabla in proyectos[proyecto]:
-
                     archivo.write(proyecto + ";" + tabla + "\n")
 
 
-def cargar_proyectos():
+def cargar_proyectos() -> dict:
+
+    """
+        carga los proyectos almacenados en 'proyectos.csv'. Si un proyecto
+        tiene tablas asociadas, las carga utilizando la función
+        `cargar_tabla()`.
+
+    Returns:
+        retorna diccionario con todos los proyectos y sus tablas
+    """
 
     proyectos = {}
 
@@ -67,3 +86,29 @@ def cargar_proyectos():
                 proyectos[proyecto][tabla] = cargar_tabla(proyecto, tabla)
 
     return proyectos
+
+
+
+def sub_menu(proyectos:dict) -> str:
+    continuar = True
+    while continuar == True:
+        print("1.CREAR PROYECTO \n2.SELECCIONAR PROYECTO \n3.MOSTRAR PROYECTO \n4.VOLVER ")
+        opciones = input("Ingrese su opcion : ")
+        match opciones:
+                case "1":
+                    nombre = input("Ingrese el nombre del proyecto: ")
+                    existe_nombre_proyecto(nombre,proyectos)
+                    crear_proyecto(nombre,proyectos)
+                case "2":
+                    mostrar_proyectos(proyectos)
+                    nombre = input("Selecciona proyecto: ")
+                    proyecto_actual = seleccionar_proyecto(nombre,proyectos)
+                    print("Proyecto seleccionado:", proyecto_actual)
+                case "3":
+                    mostrar_proyectos(proyectos)
+                case "4":
+                    print("Volviendo...")
+                    continuar = False
+                case _:
+                    print("ingrese una opcion valida")
+    return proyecto_actual

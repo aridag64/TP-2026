@@ -154,6 +154,30 @@ def dar_posicion(matriz, divisiones, k):
     return datos[posicion - 1]
 
 
+def mostrar_estadisticas(tabla:str,proyectos:dict,proyecto_actual:str) -> None:
+    
+    conteo = contar(proyectos[proyecto_actual][tabla])
+    mayor = dar_maximo(proyectos[proyecto_actual][tabla])
+    menor = dar_minimo(proyectos[proyecto_actual][tabla])
+    promedio = dar_promedio(proyectos[proyecto_actual][tabla])
+    varianza = dar_varianza(proyectos[proyecto_actual][tabla])
+    coeficiente = dar_coeficiente_variacion(proyectos[proyecto_actual][tabla])
+    desvio = dar_desvio_estandar(proyectos[proyecto_actual][tabla])
+    #mediana = dar_mediana(proyectos[proyecto_actual][tabla])
+    corte_c = int(input("Ingrese el cuartil (1 al 3): "))
+    cuartil = dar_posicion(proyectos[proyecto_actual][tabla],4,corte_c)
+    corte_d  = int(input("Ingrese el decil (1 al 9): "))
+    decil = dar_posicion(proyectos[proyecto_actual][tabla],10,corte_d)
+
+    print(f"""Conteo de datos: {conteo}
+        El promedio es: {promedio}
+        Mayor valor: {mayor}
+        Menor valor: {menor}
+        Varianza: {varianza}
+        Coeficiente: {coeficiente}
+        Desvío estándar: {desvio}
+        Cuartil: {cuartil}
+        Decil: {decil}""")
 
 
 

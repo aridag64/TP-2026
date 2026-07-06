@@ -55,12 +55,71 @@ def determinar_recursividad (num:int):
 
 
 
+def validar_acceso(acceso:bool)->bool:
+
+    if acceso == True:
+        return True
+    else:
+        return False
+
+
+
+def validar_proyecto(proyecto_actual:dict) -> bool:
+
+    if proyecto_actual == None:
+        print("Primero debe seleccionar un proyecto")
+    else:
+        return True
+
+
+
+
+def existe_proyecto(proyectos:dict) -> bool:
+    
+    if len(proyectos) == 0:
+        print("No existen proyectos")
+    else:
+        return True
+
+
+
+def existe_nombre_proyecto(nombre:str,proyectos:dict) -> bool:
+    if nombre in proyectos:
+        print("Ese proyecto ya existe.")
+    else:
+        return True
+
+def existe_nombre_tabla(nombre_tabla:str,proyectos:dict,proyecto_actual) -> bool:
+
+    if nombre_tabla in proyectos[proyecto_actual]:
+        print("Ya existe una tabla con ese nombre")
+    else:
+        return True
+
+
+def existe_proyecto_tabla(proyectos:dict,proyecto_actual:str) -> bool:
+
+    if len(proyectos[proyecto_actual]) == 0:
+        print("Este proyecto no tiene tablas.")
+    else:
+        return True
+    
+
+def existe_tabla(tabla:str,proyectos:dict,proyecto_actual:str) -> bool:
+
+    if tabla in proyectos[proyecto_actual]:
+        return True                                
+    else:
+        print("La tabla no existe.") 
+
+
+
 
 def cargar_usuarios():
 
     usuarios = {}
 
-    with open("usuarios.txt","r") as archivo:
+    with open("Usuarios/usuarios.txt","r") as archivo:
 
         for linea in archivo:
 
@@ -73,7 +132,7 @@ def cargar_usuarios():
     return usuarios
 
 
-def registrar_usuario(usuarios):
+def registrar_usuario(usuarios:dict) -> None:
 
     nuevo_usuario = input("Ingrese un usuario: ")
 
@@ -83,29 +142,27 @@ def registrar_usuario(usuarios):
         nueva_contraseña = input("Ingrese una contraseña: ")
         usuarios[nuevo_usuario] = nueva_contraseña
 
-        with open("usuarios.txt","a") as archivo:
+        with open("Usuarios/usuarios.txt","a") as archivo:
             archivo.write(f"{nuevo_usuario};{nueva_contraseña}\n")
 
         print("Usuario registrado correctamente.")
 
 
-def validar_ingreso(usuarios):
-
-    usuario = input("Ingrese nombre de usuario: ")
-
-    contraseña = input("Ingrese contraseña: ")
+def validar_ingreso(usuarios:dict,usuario:str,contraseña:int) -> bool:
 
     if usuario in usuarios:
         if usuarios[usuario] == contraseña:
-            print("Bienvenido.")
+            print("Ingreso exitoso.")
             return True
-        else:
-            print("Contraseña incorrecta.")
-    else:
-        print("Usuario inexistente.")
-        registro = input("Quiere registrarse si/no : ")
-        if registro == "si":
-            registrar_usuario(usuarios)
-        else:
-            print("Cerrando...")
-            return False
+
+        print("Contraseña incorrecta")
+        return False
+
+    print("Usuario inexistente.")
+    registro = input("¿Quiere registrarse? (si/no): ")
+
+    if registro == "si":
+        registrar_usuario(usuarios)
+        print("Ahora vuelva a iniciar sesión")
+
+    return False

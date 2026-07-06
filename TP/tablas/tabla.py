@@ -1,7 +1,5 @@
-def generar_matriz(filas: int,
-                   columnas: int,
-                   elemento_default : any = 0) -> list:
-    
+def generar_matriz(filas: int,columnas: int,elemento_default : any = 0) -> list:
+
     """
         ingresamos filas y columnas por parametro
         recorremos las filas para crear las columnas multiplicando el elemento default
@@ -18,12 +16,10 @@ def generar_matriz(filas: int,
 
         matriz.append(fila)
 
-    print("matriz generada",matriz)
-
     return matriz
 
 
-def cargar_matriz(matriz):
+def cargar_matriz(matriz:list) -> list:
 
     """
         pasamos por parametro la matriz generada con la funcion generar_matriz
@@ -44,33 +40,23 @@ def cargar_matriz(matriz):
 
 
 
-
-def modificar_tabla(matriz):
-
-    """
-        pasamos por parametro la matriz cargada de datos
-        obtenemos longitud de la matriz
-        preguntamos el numero de filas a modificar
-        validamos que exista la fila a modificar
-        si existe la modificamos
-    Returns:
-        matriz modificada
-    """
-
-    cantidad_columnas = len(matriz[0])
+def modificar_tabla(matriz: list, fila: int, columna: int) -> list:
 
     cantidad_filas = len(matriz)
+    cantidad_columnas = len(matriz[0])
 
-    print(f"Filas cargadas: Hay {cantidad_filas-1} filas de datos (índices del 1 al {cantidad_filas-1}).")
-    fila_a_cambiar = int(input("Ingrese el número de fila a modificar: "))
+    if 0 <= fila < cantidad_filas and 0 <= columna < cantidad_columnas:
 
-    if 1 <= fila_a_cambiar < cantidad_filas:
-        for j in range(cantidad_columnas):
-            nuevo_valor = input(f"'{matriz[0][j]}' (actual: '{matriz[fila_a_cambiar][j]}'): ")
-            matriz[fila_a_cambiar][j] = nuevo_valor
-        print("se completo la modificacion")
+        print(f"Valor actual: {matriz[fila][columna]}")
+
+        nuevo_valor = input("Ingrese el nuevo valor: ")
+
+        matriz[fila][columna] = nuevo_valor
+
+        print("Modificación realizada")
+
     else:
-        print("numero de fila invalido")
+        print("Fila o columna inválida")
 
     return matriz
 
@@ -78,7 +64,8 @@ def modificar_tabla(matriz):
 
 
 
-def mostrar_tabla(matriz):
+
+def mostrar_tabla(matriz) -> None:
 
     """_
         pasamos por parametro la matriz cargada tanto si esta modificada como si no
@@ -127,10 +114,11 @@ def mostrar_tabla(matriz):
         print("ingrese una respuesta valida")
 
 
-def mostrar_tablas(proyectos, proyecto_actual):
+def mostrar_tablas(proyectos, proyecto_actual) -> None:
     """
         pasamos por parametro los proyectos y el proyecto actual
         mostramos las tablas disponibles en el proyecto actual
+        no retorna nada
     """
 
     print("---TABLAS DEL PROYECTO---")
@@ -140,12 +128,13 @@ def mostrar_tablas(proyectos, proyecto_actual):
         print(tabla)
 
 
-def guardar_tabla(nombre_proyecto:str, nombre_tabla:str, matriz:list):
+def guardar_tabla(nombre_proyecto:str, nombre_tabla:str, matriz:list) -> None:
 
     """
         pasamos por parametro el nombre dado al proyecto al igual que el nombre de la tabla y la matriz
         se crea un csv con el nombre del proyecto y el nombre de la tabla
         se abre el csv y se guarda los datos dados por la matriz
+        no retorna nada
     """
 
     nombre_archivo = f"datos/{nombre_proyecto}-{nombre_tabla}.csv"
@@ -161,7 +150,7 @@ def guardar_tabla(nombre_proyecto:str, nombre_tabla:str, matriz:list):
             archivo.write("\n")
 
 
-def cargar_tabla(nombre_proyecto:str, nombre_tabla:str):
+def cargar_tabla(nombre_proyecto:str, nombre_tabla:str) -> list:
 
     """
         pasamos por parametro el nombre del proyecto y el nombre de la tabla
