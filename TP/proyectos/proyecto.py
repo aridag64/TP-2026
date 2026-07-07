@@ -20,7 +20,7 @@ def mostrar_proyectos(proyectos:dict) -> None:
         no retorna nada
     """
 
-    if existe_proyecto(proyectos):
+    if buscar_existe_proyecto(proyectos):
         print("---PROYECTOS---")
         for proyecto in proyectos:
             print("->", proyecto)
@@ -97,7 +97,7 @@ def sub_menu(proyectos:dict) -> str:
         match opciones:
                 case "1":
                     nombre = input("Ingrese el nombre del proyecto: ")
-                    existe_nombre_proyecto(nombre,proyectos)
+                    buscar_existe_nombre_proyecto(nombre,proyectos)
                     crear_proyecto(nombre,proyectos)
                 case "2":
                     mostrar_proyectos(proyectos)

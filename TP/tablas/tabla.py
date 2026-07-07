@@ -48,11 +48,8 @@ def modificar_tabla(matriz: list, fila: int, columna: int) -> list:
     if 0 <= fila < cantidad_filas and 0 <= columna < cantidad_columnas:
 
         print(f"Valor actual: {matriz[fila][columna]}")
-
         nuevo_valor = input("Ingrese el nuevo valor: ")
-
         matriz[fila][columna] = nuevo_valor
-
         print("Modificación realizada")
 
     else:
@@ -61,11 +58,7 @@ def modificar_tabla(matriz: list, fila: int, columna: int) -> list:
     return matriz
 
 
-
-
-
-
-def mostrar_tabla(matriz) -> None:
+def mostrar_tabla(matriz:list) -> None:
 
     """_
         pasamos por parametro la matriz cargada tanto si esta modificada como si no
@@ -77,10 +70,6 @@ def mostrar_tabla(matriz) -> None:
     Returns:
         no retorna nada
     """
-
-    if len(matriz) == 0:
-        print("la tabla esta vacia")
-        return
 
     cantidad_columnas = len(matriz[0])
     cantidad_filas = len(matriz)
@@ -137,7 +126,7 @@ def guardar_tabla(nombre_proyecto:str, nombre_tabla:str, matriz:list) -> None:
         no retorna nada
     """
 
-    nombre_archivo = f"datos/{nombre_proyecto}-{nombre_tabla}.csv"
+    nombre_archivo = f"TP/datos/{nombre_proyecto}-{nombre_tabla}.csv"
 
     with open(nombre_archivo, "w") as archivo:
 
@@ -161,7 +150,7 @@ def cargar_tabla(nombre_proyecto:str, nombre_tabla:str) -> list:
 
     matriz = []
 
-    nombre_archivo = f"datos/{nombre_proyecto}-{nombre_tabla}.csv"
+    nombre_archivo = f"TP/datos/{nombre_proyecto}-{nombre_tabla}.csv"
 
     with open(nombre_archivo, "r") as archivo:
         for linea in archivo:

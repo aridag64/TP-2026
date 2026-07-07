@@ -30,7 +30,7 @@ while entro == True:
                     if validar_proyecto(proyecto_actual):
                         mostrar_tablas(proyectos, proyecto_actual)
                         nombre_tabla = input("Ingrese nombre de la tabla: ")
-                        if existe_nombre_tabla(nombre_tabla,proyectos,proyecto_actual):
+                        if buscar_existe_nombre_tabla(nombre_tabla,proyectos,proyecto_actual):
                             generar_columnas = int(input("ingrese el numero de columnas deseadas : "))
                             generar_filas = int(input("ingrese el numero de filas deseadas : "))
                             matriz = generar_matriz(generar_filas, generar_columnas, "X")
@@ -40,10 +40,10 @@ while entro == True:
                             guardar_proyectos(proyectos)
             case "c":
                     if validar_proyecto(proyecto_actual):
-                        if existe_proyecto_tabla(proyectos,proyecto_actual):
+                        if buscar_existe_proyecto_tabla(proyectos,proyecto_actual):
                             mostrar_tablas(proyectos, proyecto_actual)
                             tabla = input("Ingrese el nombre de la tabla: ")
-                            if existe_tabla(tabla,proyectos,proyecto_actual):
+                            if buscar_existe_tabla(tabla,proyectos,proyecto_actual):
                                 if tabla in proyectos[proyecto_actual]:
                                     modificar = input("queres modificar la tabla si/no : ")
                                     if modificar ==  "si":
@@ -55,14 +55,14 @@ while entro == True:
                                         print("volviendo...")
             case "d":
                     if validar_proyecto(proyecto_actual):
-                        if existe_proyecto_tabla(proyectos,proyecto_actual):
+                        if buscar_existe_proyecto_tabla(proyectos,proyecto_actual):
                             mostrar_tablas(proyectos, proyecto_actual)
                             tabla = input("Ingrese la tabla a mostrar: ")
-                            if existe_tabla(tabla,proyectos,proyecto_actual):
+                            if buscar_existe_tabla(tabla,proyectos,proyecto_actual):
                                 mostrar_tabla(proyectos[proyecto_actual][tabla])  
             case "e":
                     if validar_proyecto(proyecto_actual):
-                        if existe_proyecto_tabla(proyectos,proyecto_actual):    
+                        if buscar_existe_proyecto_tabla(proyectos,proyecto_actual):    
                             mostrar_tablas(proyectos, proyecto_actual)
                             tabla = input("Ingrese la tabla a mostrar estadisticas: ")
                             mostrar_estadisticas(tabla,proyectos,proyecto_actual)

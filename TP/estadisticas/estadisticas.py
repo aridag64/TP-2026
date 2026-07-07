@@ -1,18 +1,9 @@
-'''
-contar devuelve un diccionario con frecuencias.
-maximo y minimo recorre la matriz y reemplaza el valor inicial.
+def calcular_maximo(matriz:list) -> float:
 
-
-obtener_burbujeo es la forma de ordenar. Nos sirve para usar
-despes en mediana y dar_posicion, ya que son funciones que requieren
-una lista ordenada.
-
-dar_posicion se usa para decil y cuartil por igual, el parametro 2
-es lo que cambia en el menu y el parametro 3 es elegido por 
-el usuario.
-'''
-
-def dar_maximo(matriz):
+    """ La variable maximo es el primer indice. Recorre 
+    la matriz y si encuentra un valor mas grande que 
+    esa variable, se declara el nuevo maximo. 
+    """
 
     maximo = matriz[0][0]
     for fila in matriz:
@@ -22,7 +13,11 @@ def dar_maximo(matriz):
 
     return maximo
 
-def dar_minimo(matriz):
+def calcular_minimo(matriz:list) -> float:
+
+    """Funciona igual que maximo, solo que la variable se 
+    reemplaza si encuentra un valor menor
+    """
 
     minimo = matriz[0][0]
     for fila in matriz:
@@ -32,7 +27,7 @@ def dar_minimo(matriz):
 
     return minimo
 
-def contar(matriz):
+def contar(matriz:list) -> dict:
     frecuencias = {}
 
     for fila in matriz:
@@ -45,9 +40,13 @@ def contar(matriz):
     return frecuencias
 
 
-def dar_promedio(matriz):
+def calcular_promedio(matriz:list) -> float:
 
-    datos = dar_numeros(matriz)
+    """Usando la lista armada en dar_numeros, sumamos esos valores
+    y los dividimos por la cantidad de datos (que es el len de la lista).
+    """
+
+    datos = calcular_numeros(matriz)
 
     suma = 0
 
@@ -57,12 +56,14 @@ def dar_promedio(matriz):
     return suma / len(datos)
 
 
-def dar_numeros(matriz):
+def calcular_numeros(matriz:list) -> list:
+
 
     """dar_numeros salta la fila 0 (que suele tener strings por ser nombres de columnas)
     y revisa si cada valor es un entero mediante Ascii. Si lo es, ingresa a 
     la lista. Funcion reutilizable para el resto de estadisticas.
     """
+
 
     numeros = []
 
@@ -84,10 +85,13 @@ def dar_numeros(matriz):
     return numeros
 
 
-def dar_varianza(matriz):
+def calcular_varianza(matriz:list) -> float:
+    """Al valor de dar_varianza se lo eleva a 0.5,
+    que es lo mismo que hacerle la raiz cuadrada.
+    """
 
-    datos = dar_numeros(matriz)
-    media = dar_promedio(matriz)
+    datos = calcular_numeros(matriz)
+    media = calcular_promedio(matriz)
     suma = 0
 
     for numero in datos:
@@ -98,22 +102,30 @@ def dar_varianza(matriz):
 
 def dar_desvio_estandar(matriz):
 
-    return dar_varianza(matriz) ** 0.5
+    return calcular_varianza(matriz) ** 0.5
 
 
 
-def dar_coeficiente_variacion(matriz):
+def calcular_coeficiente_variacion(matriz:list) -> int:
 
-    media = dar_promedio(matriz)
+    """el desvio estandar se divide por el promedio y al
+    resultado se lo multiplica por 100"""
+
+    media = calcular_promedio(matriz)
 
     desvio = dar_desvio_estandar(matriz)
 
     return (desvio / media) * 100
 
 
-def ordenar_burbujeo(matriz):
+def ordenar_burbujeo(matriz:list) -> list:
 
-    lista = dar_numeros(matriz)
+    """los usamos para acomodar y despues ver las posciones. Va 
+    acomodando cuando ve que un valor es mas gradne que el indice 
+    comparado
+    """
+
+    lista = calcular_numeros(matriz)
 
     for i in range(len(lista) - 1):
         for j in range(len(lista) - 1 - i):
@@ -125,19 +137,11 @@ def ordenar_burbujeo(matriz):
     return lista
 
 
-#def dar_mediana(datos):
+def calcular_posicion(matriz:list, divisiones:int, k:int) -> any:
 
-#    datos = ordenar_burbujeo(datos)
-
-#    n = len(datos)
-
-#    if n % 2 == 0:
-#        return (datos[n//2+1] + datos[n//2]) / 2
-#    else:
-#        return [datos(n+1)//2]
-
-
-def dar_posicion(matriz, divisiones, k):
+    """posicion multiplica el largo +1 y divide por el parametro
+        que depende si es cuartil o decil. 
+    """
 
     datos = ordenar_burbujeo(matriz)
 
@@ -155,19 +159,21 @@ def dar_posicion(matriz, divisiones, k):
 
 
 def mostrar_estadisticas(tabla:str,proyectos:dict,proyecto_actual:str) -> None:
+
+    """muestra en pantalla  todas las estadisticas
+    """
     
     conteo = contar(proyectos[proyecto_actual][tabla])
-    mayor = dar_maximo(proyectos[proyecto_actual][tabla])
-    menor = dar_minimo(proyectos[proyecto_actual][tabla])
-    promedio = dar_promedio(proyectos[proyecto_actual][tabla])
-    varianza = dar_varianza(proyectos[proyecto_actual][tabla])
-    coeficiente = dar_coeficiente_variacion(proyectos[proyecto_actual][tabla])
+    mayor = calcular_maximo(proyectos[proyecto_actual][tabla])
+    menor = calcular_minimo(proyectos[proyecto_actual][tabla])
+    promedio = calcular_promedio(proyectos[proyecto_actual][tabla])
+    varianza = calcular_varianza(proyectos[proyecto_actual][tabla])
+    coeficiente = calcular_coeficiente_variacion(proyectos[proyecto_actual][tabla])
     desvio = dar_desvio_estandar(proyectos[proyecto_actual][tabla])
-    #mediana = dar_mediana(proyectos[proyecto_actual][tabla])
     corte_c = int(input("Ingrese el cuartil (1 al 3): "))
-    cuartil = dar_posicion(proyectos[proyecto_actual][tabla],4,corte_c)
+    cuartil = calcular_posicion(proyectos[proyecto_actual][tabla],4,corte_c)
     corte_d  = int(input("Ingrese el decil (1 al 9): "))
-    decil = dar_posicion(proyectos[proyecto_actual][tabla],10,corte_d)
+    decil = calcular_posicion(proyectos[proyecto_actual][tabla],10,corte_d)
 
     print(f"""Conteo de datos: {conteo}
         El promedio es: {promedio}
